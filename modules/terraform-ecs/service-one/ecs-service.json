@@ -1,0 +1,25 @@
+[
+  {
+    "name": "${APPLICATION_NAME}",
+    "image": "${ECR_URL}:${APPLICATION_VERSION}",
+    "cpu": ${CPU_RESERVATION},
+    "memory" : 1024,
+    "memoryReservation": ${MEMORY_RESERVATION},
+    "essential": true,
+    "mountPoints": [],
+    "portMappings" : [
+      {
+        "containerPort": ${APPLICATION_PORT},
+        "hostPort":  ${APPLICATION_PORT}
+      }
+    ],
+    "logConfiguration": {
+          "logDriver": "fluentd",
+          "options": {
+              "fluentd-async-connect": "true",
+              "fluentd-address": "fluentd.ecs:25001",
+              "tag": "fluentd"
+          }
+    }
+  }
+]
